@@ -6,3 +6,8 @@ h-keygen -t ed25519 -C youremail@example.com
 .lightning_studio
 nltk_data
 __pycache__
+.idea
+.vscode
+.cursor-server
+.vscode-server
+.windsurf-server
