@@ -1,0 +1,8 @@
+.git-credentials
+.lesshst
+h-keygen -t ed25519 -C youremail@example.com
+.env
+.git
+.lightning_studio
+nltk_data
+__pycache__
