@@ -13,6 +13,7 @@ class Item(BaseModel):
     weight: Optional[float] = None
     summary: Optional[str] = None
     prompt: Optional[str] = None
+    completion: Optional[str] = None
     id: Optional[int] = None
 
     def prepare_prompt(self , text:str):
@@ -24,6 +25,29 @@ class Item(BaseModel):
     def __repr__(self):
         return f"<Title: {self.title} | Category:  {self.category} | Price {self.price}>"
     
+    def count_tokens(self, tokenizer):
+        """Count tokens in the summary"""
+        return len(tokenizer.encode(self.summary, add_special_tokens=False))
+
+    def make_prompts(self, tokenizer, max_tokens, do_round):
+        """Make prompts and completions"""
+        tokens = tokenizer.encode(self.summary, add_special_tokens=False)
+        if len(tokens) > max_tokens:
+            summary = tokenizer.decode(tokens[:max_tokens]).rstrip()
+        else:
+            summary = self.summary
+        self.prompt = f"{QUESTION}\n\n{summary}\n\n{PREFIX}"
+        self.completion = f"{round(self.price)}.00" if do_round else str(self.price)
+
+    def count_prompt_tokens(self, tokenizer):
+        """Count tokens in the prompt"""
+        full = self.prompt + self.completion
+        tokens = tokenizer.encode(full, add_special_tokens=False)
+        return len(tokens)
+
+    def to_datapoint(self) -> dict:
+        return {"prompt": self.prompt, "completion": self.completion}
+
     @staticmethod
     def push_to_hub(dataset_name:str, train:List[Self], val:List[Self], test:List[Self]):
         DatasetDict(
