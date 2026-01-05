@@ -4,7 +4,7 @@ project:
   hf_user: ujalaarshad17
 
 run:
-  run_name: "2025-12-16_05.43.13"
+  run_name: 2025-12-16_05.43.13
   revision: null
 
 dataset:

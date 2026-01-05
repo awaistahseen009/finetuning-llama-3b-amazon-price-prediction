@@ -3,7 +3,7 @@ import re
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-app = modal.App("llama-price-predictor-1", include_source=True)
+app = modal.App("llama-price-predictor-2", include_source=True)
 
 secrets = modal.Secret.from_name("openai-api-key")
 
@@ -83,29 +83,36 @@ class ModelService:
             {"role": "user", "content": content},
         ]
 
-        with torch.inference_mode():
-            rewrite = completion(
-                model="openai/gpt-4o",
-                messages=messages,
-                temperature=0.0,
-                max_tokens=256,
-            )
+        rewrite = completion(
+            model="openai/gpt-4o",
+            messages=messages,
+            temperature=0.0,
+            max_tokens=256,
+        )
 
-        raw_text = rewrite.choices[0].message.content.strip()
+        rewritten_description = rewrite.choices[0].message.content.strip()
 
-        lines = []
-        for line in raw_text.split("\n"):
-            if ": " in line:
-                _, value = line.split(": ", 1)
-                lines.append(value.strip())
+        print(f"GPT-4o FULL RESPONSE:\n{rewritten_description}")
 
-        rewritten_prompt = lines[3] if len(lines) > 3 else raw_text
+        # Directly prepend the price question to the full GPT response
+        final_prompt = f"What is the price of the product, rounded to the nearest dollar?\n\n{rewritten_description}"
 
-        with torch.inference_mode():
-            raw_output = predictor.predict(rewritten_prompt)
+        print(f"FINAL PROMPT SENT TO LOCAL MODEL:\n{final_prompt}")
+
+        raw_output = predictor.predict(final_prompt)
+
+        print(f"LOCAL MODEL RAW OUTPUT: '{raw_output}'")
+
+        cleaned_text = raw_output.replace("$", "").replace(",", "").strip()
+        print(f"CLEANED TEXT (before regex): '{cleaned_text}'")
 
         price = extract_price(raw_output)
-        return price if price > 0 else 999.0
+        print(f"EXTRACTED PRICE (after regex): {price}")
+
+        final_price = price if price > 0 else 999.0
+        print(f"FINAL PRICE RETURNED: {final_price}")
+
+        return final_price
 
 web_app = FastAPI()
 
