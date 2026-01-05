@@ -1,0 +1,19 @@
+project:
+  base_model: meta-llama/Llama-3.2-3B
+  project_name: latest-second-price-p
+  hf_user: ujalaarshad17
+
+run:
+  run_name: "2025-12-16_05.43.13"
+  revision: null
+
+dataset:
+  user: ed-donner
+  name: items_prompts_lite
+
+quantization:
+  use_4bit: false
+
+generation:
+  max_new_tokens: 8
+  seed: 42
