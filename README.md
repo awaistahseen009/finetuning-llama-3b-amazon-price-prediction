@@ -2,7 +2,7 @@
 
 A comprehensive machine learning system that fine-tunes LLaMA-3.2-3B to predict product prices based on descriptions, with comparative analysis against traditional ML and deep learning approaches.
 
-## 🎯 Project Overview
+## Project Overview
 
 This project implements an end-to-end price prediction system using multiple approaches:
 - **Fine-tuned LLaMA-3.2-3B** (Primary approach)
@@ -12,7 +12,7 @@ This project implements an end-to-end price prediction system using multiple app
 
 The system achieves a **$40 average error**, outperforming all traditional approaches, and is deployed on Modal with A10G GPU for real-time inference.
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -46,7 +46,7 @@ The system achieves a **$40 average error**, outperforming all traditional appro
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── fine-tuning-modules/          # Production ML pipeline
@@ -114,7 +114,7 @@ The system achieves a **$40 average error**, outperforming all traditional appro
 └── README.md                     # This file
 ```
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -173,7 +173,7 @@ cd frontend
 npm install
 ```
 
-## 🏃‍♂️ Running the Application
+## Running the Application
 
 ### Start the Backend Server
 
@@ -221,15 +221,15 @@ npm run build
 npm run preview
 ```
 
-## 🎨 Frontend Features
+## Frontend Features
 
-### **Beautiful User Interface:**
+### User Interface:
 - **Modern Design** - Gradient backgrounds and elegant card layouts
 - **Responsive Layout** - Works perfectly on desktop, tablet, and mobile
 - **Real-time Feedback** - Loading states with progress indicators
 - **Interactive Elements** - Expandable sections and hover effects
 
-### **Key Components:**
+### Key Components:
 1. **Price Input Form** - Large textarea for product descriptions
 2. **AI Prediction Card** - Shows ML model prediction in blue
 3. **Market Average Card** - Displays web-scraped market data in green
@@ -237,15 +237,15 @@ npm run preview
 5. **Sources Dropdown** - Expandable list of scraped websites with prices
 6. **Accuracy Assessment** - Color-coded prediction accuracy indicators
 
-### **User Experience:**
+### User Experience:
 - **Progress Tracking** - Shows "Getting AI prediction...", "Searching the web...", etc.
 - **Error Handling** - User-friendly error messages and timeout handling
 - **External Links** - Direct links to source websites
 - **Price Visualization** - Color-coded price tags and comparison metrics
 
-## 🔧 API Usage
+## API Usage
 
-### **Price Comparison Endpoint**
+### Price Comparison Endpoint
 
 ```bash
 curl -X POST "http://localhost:8000/compare-price" \
@@ -253,7 +253,7 @@ curl -X POST "http://localhost:8000/compare-price" \
   -d '{"content": "Used MacBook Pro 14-inch M1 Pro, 16GB RAM, great condition"}'
 ```
 
-### **Response Format**
+### Response Format
 
 ```json
 {
@@ -280,21 +280,21 @@ curl -X POST "http://localhost:8000/compare-price" \
 }
 ```
 
-## 🔍 System Workflow
+## System Workflow
 
-### **Agent Pipeline:**
+### Agent Pipeline:
 1. **Price Prediction** - Calls Modal API for AI prediction
 2. **Web Search** - Uses Serper API to find product listings (max 5 results)
 3. **Web Scraping** - Uses FireCrawl API to extract price data (1 page per result)
 4. **Analysis** - Compares AI prediction with market data
 5. **Response** - Returns comprehensive price analysis
 
-### **Conditional Flow:**
+### Conditional Flow:
 - If AI prediction fails → Skip to web search only
 - If web search fails → Return AI prediction only  
 - If both fail → Return appropriate error messages
 
-## 📊 Performance Results
+## Performance Results
 
 | Approach | Average Error | MSE | R² Score | Notes |
 |----------|---------------|-----|----------|-------|
@@ -304,16 +304,16 @@ curl -X POST "http://localhost:8000/compare-price" \
 | Mean Estimation | $100+ | High | Low | Simple baseline |
 
 ### Key Achievements
-- ✅ **40% better** than traditional ML approaches
-- ✅ **Real-time inference** on Modal cloud
-- ✅ **Scalable architecture** with GPU optimization
-- ✅ **Comprehensive evaluation** framework
-- ✅ **Beautiful web interface** with real-time market data
-- ✅ **Agent-based system** with web search and scraping
+- 40% better than traditional ML approaches
+- Real-time inference on Modal cloud
+- Scalable architecture with GPU optimization
+- Comprehensive evaluation framework
+- Beautiful web interface with real-time market data
+- Agent-based system with web search and scraping
 
-## 🛠️ Development
+## Development
 
-### **Backend Development:**
+### Backend Development:
 ```bash
 # Install development dependencies
 pip install -r requirements.txt
@@ -325,7 +325,7 @@ uvicorn app:app --reload
 python -m pytest
 ```
 
-### **Frontend Development:**
+### Frontend Development:
 ```bash
 cd frontend
 
@@ -345,7 +345,7 @@ npm run preview
 npm run lint
 ```
 
-## 🔑 Environment Variables
+## Environment Variables
 
 Required environment variables (see `readme.env` for template):
 
@@ -368,18 +368,18 @@ GROQ_API_KEY=your_groq_api_key_here
 WANDB_API_KEY=your_wandb_api_key_here
 ```
 
-## 🎯 Future Enhancements
+## Future Enhancements
 
-- [ ] **Multi-modal inputs**: Image + text processing
-- [ ] **Dynamic pricing**: Market trend integration
-- [ ] **Category-specific models**: Specialized fine-tuning
-- [ ] **Uncertainty quantification**: Confidence intervals
-- [ ] **A/B testing framework**: Model comparison in production
-- [ ] **Mobile app**: React Native implementation
-- [ ] **Real-time updates**: WebSocket integration
-- [ ] **User accounts**: Save search history and favorites
+- Multi-modal inputs: Image + text processing
+- Dynamic pricing: Market trend integration
+- Category-specific models: Specialized fine-tuning
+- Uncertainty quantification: Confidence intervals
+- A/B testing framework: Model comparison in production
+- Mobile app: React Native implementation
+- Real-time updates: WebSocket integration
+- User accounts: Save search history and favorites
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing-feature`)
@@ -387,11 +387,11 @@ WANDB_API_KEY=your_wandb_api_key_here
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Meta AI** for LLaMA-3.2-3B model
 - **Hugging Face** for transformers and datasets
@@ -402,4 +402,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for accurate price prediction using state-of-the-art LLM fine-tuning and intelligent web agents**
+**Built for accurate price prediction using state-of-the-art LLM fine-tuning and intelligent web agents**
